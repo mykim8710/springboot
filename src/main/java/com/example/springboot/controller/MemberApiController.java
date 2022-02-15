@@ -3,9 +3,9 @@ package com.example.springboot.controller;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.RestController;
 
-@RequiredArgsConstructor
-@RestController
-public class MemberController {
+//@RequiredArgsConstructor
+//@RestController
+public class MemberApiController {
 
     
 }
