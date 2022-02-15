@@ -3,7 +3,6 @@ package com.example.springboot.repository;
 
 import com.example.springboot.domain.Member;
 import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
@@ -12,7 +11,7 @@ import static org.assertj.core.api.Assertions.*;
 
 
 class MemoryMemberRepositoryTest {
-    MemoryMemberRepositoryImpl repository = new MemoryMemberRepositoryImpl();
+    MemoryMemberRepository repository = new MemoryMemberRepository();
 
     // @AfterEach -> 각 테스트가 종료될 때 마다 이 기능을 실행한다.
     @AfterEach
