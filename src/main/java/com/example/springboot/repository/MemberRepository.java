@@ -10,6 +10,7 @@ public interface MemberRepository {
     Member save(Member member);
 
     // id로 회원조회
+    // Optional > 조회시 null처리할때 사용
     Optional<Member> findById(Long id);
 
     // name으로 회원조회
@@ -17,5 +18,4 @@ public interface MemberRepository {
 
     // 전체 회원조회
     List<Member> findAll();
-
 }
