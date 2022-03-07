@@ -1,4 +1,24 @@
 server:
   port: 9090
+---
+spring:
+  # DB(MySQL) DataSource 설정
+  datasource:
+    url: jdbc:mysql://127.0.0.1:3306/springBootDemo
+    username: root
+    password: kmy5708!@#
 
+    # view Template Engine 설정 > Thymeleaf
+    thymeleaf:
+      #mode: HTML
+      #encoding: UTF-8
+      #check-template-location: true
+      prefix: classpath:/templates/
+      suffix: .html
+      cache: false   #(개발모드 : false, 운영모드 : true)
+
+    # static resource에 변화가 있을 때 바로반영(build Automaticall 해야됨)
+    devtools:
+      livereload:
+        enabled: true
 

@@ -1,6 +1,6 @@
-package com.example.springboot.domain;
+package com.example.springboot.members.domain;
 
-import com.example.springboot.dto.response.ResponseMemberDto;
+import com.example.springboot.members.dto.response.ResponseMemberSelectDto;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
@@ -14,8 +14,8 @@ public class Member {
     private Long id;       // sequence
     private String name;
 
-    public ResponseMemberDto toResponseMemberDto() {
-        return ResponseMemberDto.builder()
+    public ResponseMemberSelectDto toResponseMemberDto() {
+        return ResponseMemberSelectDto.builder()
                                     .id(id)
                                     .name(name)
                                         .build();

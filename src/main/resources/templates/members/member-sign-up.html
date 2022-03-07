@@ -1,0 +1,59 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>Title</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <script type="text/javascript">
+            $(document).ready(function () {
+                $('#addBtn').click(function () {
+                    signUpMember();
+                });
+            });
+
+            function signUpMember() {
+                let name = $('#name').val();
+                let requestSignUpMemberDto = {
+                    "name" : name
+                }
+
+                $.ajax({
+                    type : 'POST',
+                    url : '/api/members',
+                    dataType : 'json',
+                    contentType : 'application/json; charset=utf-8',
+                    //async : false,
+                    data : JSON.stringify(requestSignUpMemberDto),
+                    success: function(data) {
+                        console.log(data);
+                        if(data > 0) {
+                            alert("sign up Success!!")
+                        }
+                    },
+                    error : function(error) {
+                        console.log(error);
+                        let errorMessage = error.responseJSON.message;
+                        $('#errorMessage').text(errorMessage);
+                    }
+                });
+            }
+        </script>
+        <style>
+            .errorMessage {
+                color: red;
+                font-weight: bold;
+            }
+        </style>
+    </head>
+    <body>
+        <h1>MEMBER Sign Up</h1>
+        <div class="container">
+            <div class="form-group">
+                <label for="name">member name</label>
+                <input type="text" id="name" name="name" placeholder="Input member's name">
+            </div>
+            <button type="button" id="addBtn">SIGN-UP</button>
+        </div>
+        <p id="errorMessage" class="errorMessage"></p>
+    </body>
+</html>

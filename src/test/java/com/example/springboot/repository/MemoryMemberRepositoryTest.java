@@ -1,7 +1,8 @@
 package com.example.springboot.repository;
 
 
-import com.example.springboot.domain.Member;
+import com.example.springboot.members.domain.Member;
+import com.example.springboot.members.repository.MemoryMemberRepository;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 

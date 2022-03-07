@@ -1,28 +1,33 @@
-package com.example.springboot.service;
+package com.example.springboot.members.service;
 
-import com.example.springboot.domain.Member;
-import com.example.springboot.dto.request.RequestMemberDto;
-import com.example.springboot.dto.response.ResponseMemberDto;
-import com.example.springboot.repository.MemberRepository;
+import com.example.springboot.members.domain.Member;
+import com.example.springboot.members.dto.request.RequestSignUpMemberDto;
+import com.example.springboot.members.dto.response.ResponseMemberSelectDto;
+import com.example.springboot.members.exception.ExistMemberException;
+import com.example.springboot.global.error.ErrorCode;
+import com.example.springboot.members.repository.MemberRepository;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-//@RequiredArgsConstructor
-//@Service
+@Slf4j
+@RequiredArgsConstructor
+@Service
 public class MemberService {
-
     private final MemberRepository memberRepository;
 
-    // DI : Dependency Injection 의존성주입
-    public MemberService(MemberRepository memberRepository) {
-        this.memberRepository = memberRepository;
-    }
+//    @Autowired
+//    public MemberService(MemberRepository memberRepository) {
+//        this.memberRepository = memberRepository;
+//    }
 
     /* 회원가입 */
-    public Long signUp(RequestMemberDto dto) {
+    public Long signUp(RequestSignUpMemberDto dto) {
         validateDuplicateMember(dto); // 중복회원 검증
 
         Member member = Member.builder()
@@ -34,8 +39,8 @@ public class MemberService {
     }
 
     /* 전체 회원조회 */
-    public List<ResponseMemberDto> findMembers() {
-        List<ResponseMemberDto> members =  new ArrayList<>();
+    public List<ResponseMemberSelectDto> findMembers() {
+        List<ResponseMemberSelectDto> members =  new ArrayList<>();
 
         members.addAll(memberRepository.findAll()
                                             .stream()
@@ -46,18 +51,18 @@ public class MemberService {
     }
 
     /* id로 회원조회 */
-    public ResponseMemberDto findOne(Long memberId) {
+    public ResponseMemberSelectDto findOne(Long memberId) {
         Member member = memberRepository.findById(memberId)
                                             .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 회원입니다."));
 
         return member.toResponseMemberDto();
     }
 
-    private void validateDuplicateMember(RequestMemberDto dto) {
-        // 만약 값이 있다면 == not null Optional이기에  가능
+    private void validateDuplicateMember(RequestSignUpMemberDto dto) {
+        // 만약 값이 있다면 == not null Optional임으로  가능
         memberRepository.findByName(dto.getName())
                 .ifPresent(member -> {
-                    throw new IllegalArgumentException("이미 존재하는 회원입니다.");
+                    throw new ExistMemberException(ErrorCode.EXIST_MEMBER);
                 });
     }
 }

@@ -1,6 +1,6 @@
-package com.example.springboot.repository;
+package com.example.springboot.members.repository;
 
-import com.example.springboot.domain.Member;
+import com.example.springboot.members.domain.Member;
 
 import java.util.List;
 import java.util.Optional;
