@@ -40,13 +40,16 @@
     │   │                      ├── controller
     │   │                      │   └── MemberApiController(C)    
     │   │                      ├── service
+    │   │                      │   ├── JpaMemberService(C)    
     │   │                      │   └── MemberService(C)
     │   │                      ├── repository
     │   │                      │   ├── MemberRepository(I)
     │   │                      │   ├── MemoryMemberRepository(C)
     │   │                      │   ├── DBMemberRepository(C)
-    │   │                      │   └── 
+    │   │                      │   ├── JpaMemberRepository(I)
+    │   │                      │   └── SpringDataJpaMemberRepository(I)
     │   │                      ├── domain
+    │   │                      │   ├── JPAMember(C)    
     │   │                      │   └── Member(C)
     │   │                      └── dto
     │   │                          ├── request
