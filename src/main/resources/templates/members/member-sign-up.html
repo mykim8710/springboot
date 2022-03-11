@@ -7,7 +7,7 @@
         <script type="text/javascript">
             $(document).ready(function () {
                 $('#addBtn').click(function () {
-                    signUpMember();
+                   signUpMember();
                 });
             });
 
@@ -22,19 +22,17 @@
                     url : '/api/members',
                     dataType : 'json',
                     contentType : 'application/json; charset=utf-8',
-                    //async : false,
-                    data : JSON.stringify(requestSignUpMemberDto),
-                    success: function(data) {
-                        console.log(data);
-                        if(data > 0) {
-                            alert("sign up Success!!")
-                        }
-                    },
-                    error : function(error) {
-                        console.log(error);
-                        let errorMessage = error.responseJSON.message;
-                        $('#errorMessage').text(errorMessage);
+                    data : JSON.stringify(requestSignUpMemberDto)
+                }).done(function(data) {
+                    console.log(data);
+                    if(data > 0) {
+                        alert("sign up Success!!")
+                        location.href='/';
                     }
+                }).fail(function(error) {
+                    console.log(error);
+                    let errorMessage = error.responseJSON.message;
+                    $('#errorMessage').text(errorMessage);
                 });
             }
         </script>

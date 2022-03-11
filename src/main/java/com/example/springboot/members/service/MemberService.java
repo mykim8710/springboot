@@ -1,14 +1,13 @@
 package com.example.springboot.members.service;
 
+import com.example.springboot.global.error.ErrorCode;
 import com.example.springboot.members.domain.Member;
 import com.example.springboot.members.dto.request.RequestSignUpMemberDto;
 import com.example.springboot.members.dto.response.ResponseMemberSelectDto;
 import com.example.springboot.members.exception.ExistMemberException;
-import com.example.springboot.global.error.ErrorCode;
 import com.example.springboot.members.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -20,11 +19,6 @@ import java.util.stream.Collectors;
 @Service
 public class MemberService {
     private final MemberRepository memberRepository;
-
-//    @Autowired
-//    public MemberService(MemberRepository memberRepository) {
-//        this.memberRepository = memberRepository;
-//    }
 
     /* 회원가입 */
     public Long signUp(RequestSignUpMemberDto dto) {
@@ -51,7 +45,7 @@ public class MemberService {
     }
 
     /* id로 회원조회 */
-    public ResponseMemberSelectDto findOne(Long memberId) {
+    public ResponseMemberSelectDto findMemberOne(Long memberId) {
         Member member = memberRepository.findById(memberId)
                                             .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 회원입니다."));
 

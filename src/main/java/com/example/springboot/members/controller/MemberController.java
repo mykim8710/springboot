@@ -5,7 +5,6 @@ import com.example.springboot.members.dto.response.ResponseMemberSelectDto;
 import com.example.springboot.members.service.MemberService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -21,11 +20,6 @@ import java.util.List;
 @Controller
 public class MemberController {
     private final MemberService memberService;
-
-//    @Autowired
-//    public MemberController(MemberService memberService) {
-//        this.memberService = memberService;
-//    }
 
     @GetMapping("/members")
     public String memberListView() {
@@ -47,7 +41,7 @@ public class MemberController {
     public ResponseEntity<List<ResponseMemberSelectDto>> getMembers() {
         log.info("[GET] /api/members => get member list");
 
-        return new ResponseEntity<>(null, HttpStatus.OK);
+        return new ResponseEntity<>(memberService.findMembers(), HttpStatus.OK);
     }
 
     @PostMapping("/api/members")

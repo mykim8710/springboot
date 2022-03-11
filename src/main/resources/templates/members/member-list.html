@@ -4,9 +4,73 @@
         <title>Title</title>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
         <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+        <script type="text/javascript">
+            $(document).ready(function () {
+                getMembers();
+                drawMembers();
+            });
+
+            let members;
+            let totalCount;
+
+            function getMembers() {
+                $.ajax({
+                    type : 'GET',
+                    url : '/api/members',
+                    dataType : 'json',
+                    contentType : 'application/json; charset=utf-8',
+                    async : false,
+                }).done(function(data) {
+                    members = data;
+                    totalCount = data.length;
+                }).fail(function(error) {
+                    console.log(error);
+                });
+            }
+
+            function drawMembers() {
+                $('#members table tbody').empty();
+
+                if(totalCount == 0) {
+                    let tag = '';
+                        tag += '<tr>';
+                        tag += '<td colspan="2">';
+                        tag += '<p>' +'Member table is empty.' +'</p>';
+                        tag += '</td>';
+                        tag += '</tr>';
+
+                    $('#members table tbody').append(tag);
+                } else {
+                    members.forEach(member => {
+                        let tag = '';
+                            tag += '<tr>';
+                            tag += '<td>' +member.id +'</td>';
+                            tag += '<td>' +member.name +'</td>';
+                            tag += '</tr>';
+
+                        $('#members table tbody').append(tag);
+                    });
+                }
+            }
+        </script>
+
     </head>
     <body>
         <h1>MEMBER LIST</h1>
+
+        <div id="members">
+            <table border="1">
+                <thead>
+                    <tr>
+                        <td>ID</td>
+                        <td>NAME</td>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+
 
     </body>
 </html>

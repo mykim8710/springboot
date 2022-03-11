@@ -1,4 +1,4 @@
-package com.example.springboot.repository;
+package com.example.springboot.members.repository;
 
 
 import com.example.springboot.members.domain.Member;

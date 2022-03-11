@@ -14,23 +14,9 @@ import javax.sql.DataSource;
 
 // @Repository 방식 MyBatis 설정
 @Configuration
-//@ComponentScan(value="com.example.springboot.**.repository")
 public class MybatisConfig2 {
     @Autowired
     ApplicationContext applicationContext;
-
-//    @Bean
-//    public SqlSessionFactoryBean sqlSessionFactory(DataSource dataSource) throws Exception { // mybatis 사용을 위한 sessionFactory bean 등록
-//        SqlSessionFactoryBean sqlSessionFactory = new SqlSessionFactoryBean();
-//        sqlSessionFactory.setDataSource(dataSource);
-//        sqlSessionFactory.setConfigLocation(new PathMatchingResourcePatternResolver().getResource("classpath:mybatis-config.xml")); // mybatis 설정파일 등록
-//        return sqlSessionFactory;
-//    }
-//
-//    @Bean
-//    public SqlSessionTemplate sqlSession(SqlSessionFactoryBean sqlsessionFactory) throws Exception { // mybatis 사용을 위한 sqlSession bean 등록
-//        return new SqlSessionTemplate(sqlsessionFactory.getObject());
-//    }
 
     @Bean
     public SqlSessionFactory sqlSessionFactory(DataSource dataSource) throws Exception {

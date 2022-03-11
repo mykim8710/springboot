@@ -1,16 +1,15 @@
-package com.example.springboot.service;
+package com.example.springboot.members.service;
 
 import com.example.springboot.members.dto.request.RequestSignUpMemberDto;
 import com.example.springboot.members.dto.response.ResponseMemberSelectDto;
 import com.example.springboot.members.exception.ExistMemberException;
 import com.example.springboot.members.repository.MemoryMemberRepository;
-import com.example.springboot.members.service.MemberService;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import static org.assertj.core.api.Assertions.*;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class MemberServiceTest {
     MemberService service;
@@ -40,7 +39,7 @@ class MemberServiceTest {
         System.out.println(memberId);
 
         // then   :  ~ 결과가 이것이 나와야 된다.
-        ResponseMemberSelectDto expectedDto = service.findOne(memberId);
+        ResponseMemberSelectDto expectedDto = service.findMemberOne(memberId);
         assertThat("mykim").isEqualTo(expectedDto.getName());
     }
 
