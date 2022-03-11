@@ -13,7 +13,7 @@ import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 import javax.sql.DataSource;
 
 // @Repository 방식 MyBatis 설정
-@Configuration
+//@Configuration
 public class MybatisConfig2 {
     @Autowired
     ApplicationContext applicationContext;

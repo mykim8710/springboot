@@ -7,7 +7,7 @@ import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 
 import javax.sql.DataSource;
 
-// @Mapper 방식 MyBtis 설정
+// @Mapper 방식 MyBatis 설정
 //@Configuration
 //@MapperScan(basePackages = "com.example.springboot.**.repository")	// 프로젝트 패키지 내의 모든 폴더 안에 @mapper를 scan
 public class MybatisConfig1 {

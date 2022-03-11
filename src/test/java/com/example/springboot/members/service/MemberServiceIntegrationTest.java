@@ -1,46 +1,43 @@
 package com.example.springboot.members.service;
 
+import com.example.springboot.members.domain.Member;
 import com.example.springboot.members.dto.request.RequestSignUpMemberDto;
-import com.example.springboot.members.dto.response.ResponseMemberSelectDto;
 import com.example.springboot.members.exception.ExistMemberException;
-import com.example.springboot.members.repository.MemoryMemberRepositoryImpl;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
+import com.example.springboot.members.repository.MemberRepository;
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.transaction.annotation.Transactional;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-class MemberServiceTest {
-    MemberService service;
-    MemoryMemberRepositoryImpl repository;
+// spring 컨테이너 없이 최소한의 단위로 잘 나누어 단위 테스트로 진행하는것이 좋음
 
-    // @BeforeEach -> 각 테스트가 실행 전에 해당 로직을 수행
-    @BeforeEach
-    public void beforeEach() {
-        repository = new MemoryMemberRepositoryImpl();
-        service = new MemberService(repository);
-    }
+@SpringBootTest // 스프링 컨테이너와 테스트를 함께 실행한다.
+@Transactional  // 테스트 케이스에 이 애노테이션이 있으면, 테스트 시작 전에 트랜잭션을 시작하고, 테스트 완료 후에 항상 롤백한다. 이렇게 하면 DB에 데이터가 남지 않으므로 다음 테스트에 영향을 주지 않는다.
+class MemberServiceIntegrationTest {
+    @Autowired
+    private MemberService service;
 
-    // @AfterEach -> 각 테스트가 종료될 때 해당 기능을 수행
-    @AfterEach
-    public void afterEach() {
-        repository.clearStore();    // memory clear
-    }
+    @Autowired
+    private MemberRepository repository;
 
     @Test
+    //@Commit >> commit함
     public void 회원가입_테스트() {
         // given  :  ~ 이 주어지고
         RequestSignUpMemberDto requestDto = new RequestSignUpMemberDto();
-        requestDto.setName("mykim");
+        requestDto.setName("test");
 
         // when   :  ~ 이것을 실행했을때
         Long memberId = service.signUp(requestDto);
         System.out.println(memberId);
 
         // then   :  ~ 결과가 이것이 나와야 된다.
-        ResponseMemberSelectDto expectedDto = service.findMemberOne(memberId);
-        assertThat("mykim").isEqualTo(expectedDto.getName());
+        Member findMember = repository.findById(memberId).get();
+        assertEquals(requestDto.getName(), findMember.getName());
     }
 
     @Test

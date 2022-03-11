@@ -3,14 +3,13 @@ package com.example.springboot.members.repository;
 import com.example.springboot.members.domain.Member;
 import lombok.RequiredArgsConstructor;
 import org.apache.ibatis.session.SqlSession;
-import org.springframework.stereotype.Repository;
 
 import java.util.List;
 import java.util.Optional;
 
 @RequiredArgsConstructor
-@Repository
-public class DBMemberRepository implements MemberRepository {
+//@Repository
+public class MyBatisMemberRepositoryImpl implements MemberRepository {
     private final SqlSession sqlSession;
 
     @Override
