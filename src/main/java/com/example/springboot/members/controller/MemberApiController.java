@@ -7,6 +7,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -28,13 +29,11 @@ public class MemberApiController {
 
     @PostMapping("/api/members")
     @ResponseBody
-    public ResponseEntity<Long> signUpMembers(@RequestBody RequestSignUpMemberDto requestSignUpMemberDto) {
+    public ResponseEntity<Long> signUpMembers(@Validated @RequestBody RequestSignUpMemberDto requestSignUpMemberDto) {
         log.info("[POST] /api/members => Sign-up New member");
         log.info("RequestSignUpMemberDto => " +requestSignUpMemberDto);
 
         return new ResponseEntity<>(memberService.signUp(requestSignUpMemberDto), HttpStatus.OK);
     }
 
-
-    
 }

@@ -83,15 +83,53 @@
 - 단위 Test : Service, Repository Test
 
 5) Error 처리
-- BusinessException extends RuntimeException => 사용자 예외정의
-- GlobalExceptionHandler 적용
+- BusinessException extends RuntimeException => 사용자 예외정의 및 처리
+- Sign-up Backend Validation Exception 처리
+- GlobalExceptionHandler >> 전역 Exception관리
 - ErrorCode : Enum으로 관리
 
-6) JPA(Java Persistance API) 기초
-- JPA는 기존의 반복 코드는 물론이고, 기본적인 SQL도 JPA가 직접 만들어서 실행
-- JPA를 사용하면, SQL과 데이터 중심의 설계에서 객체 중심의 설계로 패러다임을 전환 
-- JPA를 사용하면 개발 생산성을 크게 높일 수 있음
+6) Rest API
+```
+* Sign-Up
+- POST /api/members
+- requestParameter
+RequestSignUpMemberDto  |  {} json Object
 
+requestSignUpMemberDto = {
+    "name" : ""     |  사용자 이름  |  String
+}
+
+- response Data
+
+[ok]
+sign-up userId(pk) | Long 
+200 ok             | HttpStatus
+
+[error]
+ExistMember Exception
+{
+    "status": 400,
+    "code": "A001",
+    "message": "This member is exist."
+}
+
+------------------------------------------------------
+
+* Get Member List
+- GET /api/members
+- requestParameter : X
+- response Data
+
+List<ResponseMemberSelectDto>  | [{},{},{}....] json Object List
+[
+    {
+      "id" : 1,
+      "name" : "mmm"
+    },{},{},{}...
+]
+
+200 ok                         | HttpStatus
+```
 
 
 

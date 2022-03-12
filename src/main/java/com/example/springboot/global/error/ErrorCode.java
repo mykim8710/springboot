@@ -10,7 +10,11 @@ import lombok.ToString;
 public enum ErrorCode {
 
     //Sign-up Error
-    EXIST_MEMBER(400, "S001", "This member is exist.");
+    EXIST_MEMBER(400, "S001", "This member is exist."),
+
+    // Validation Error
+    NOT_BLANK(400, "V001", ""),
+    ;
 
 
     private int status;
