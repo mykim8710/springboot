@@ -5,7 +5,7 @@
   - 스프링부트 초기세팅
   - MyBatis, JPA 기본
   - 간단한 TestCode 작성
-  - Error 처리
+  - Error 처리 => Business Exception, Validation Exception
   - Restful api
 
 1) 개발환경
@@ -34,8 +34,8 @@
     │   │               │   └── error
     │   │               │         ├── BusinessException(C)
     │   │               │         ├── ErrorCode(E)
-    │   │               │         ├── ErrorResponse
-    │   │               │         └── GlobalExceptionHandler
+    │   │               │         ├── ErrorResponse(C)
+    │   │               │         └── GlobalExceptionHandler(C)
     │   │               └── members     
     │   │                      ├── controller
     │   │                      │   └── MemberApiController(C)    
@@ -52,10 +52,13 @@
     │   │                      │   ├── JPAMember(C)    
     │   │                      │   └── Member(C)
     │   │                      └── dto
-    │   │                          ├── request
-    │   │                          │       └── RequestSignUpMemberDto(C)
-    │   │                          └── response
-    │   │                                  └── ResponseMemberSelectDto(C)
+    │   │                      │   ├── request
+    │   │                      │   │       └── RequestSignUpMemberDto(C)
+    │   │                      │   └── response
+    │   │                      │           └── ResponseMemberSelectDto(C)
+    │   │                      └── exception
+    │   │                          ├── ExistAccountException(C)
+    │   │                          └── NoFindUserException(C)        
     │   │                      
     │   └── resources
     │       ├── mappers : SQL Query xml
